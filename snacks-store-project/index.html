@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snack Haven - Your Premium Snacks Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🍿 Snack Haven</div>
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 Cart
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Snack Paradise!</h1>
+        <p>Discover India's finest chips, biscuits, and namkeen from trusted brands</p>
+    </section>
+
+    <div class="category-filter">
+        <button class="filter-btn active" onclick="filterCategory('all')">All Products</button>
+        <button class="filter-btn" onclick="filterCategory('chips')">Chips</button>
+        <button class="filter-btn" onclick="filterCategory('biscuits')">Biscuits</button>
+        <button class="filter-btn" onclick="filterCategory('namkeen')">Namkeen</button>
+    </div>
+
+    <div class="products-container" id="productsContainer">
+        <!-- Products will be dynamically loaded here -->
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total Amount:</span>
+                <span class="cart-total-amount" id="cartTotal">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="showPayment()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h2>Payment Details</h2>
+                <p style="color: #666; margin-top: 0.5rem;">Total: <strong id="paymentTotal" style="color: var(--primary); font-size: 1.5rem;">₹0</strong></p>
+            </div>
+            
+            <div class="payment-methods">
+                <div class="payment-method selected" onclick="selectPaymentMethod('card')" data-method="card">
+                    <div class="payment-method-icon">💳</div>
+                    <div class="payment-method-name">Card</div>
+                </div>
+                <div class="payment-method" onclick="selectPaymentMethod('upi')" data-method="upi">
+                    <div class="payment-method-icon">📱</div>
+                    <div class="payment-method-name">UPI</div>
+                </div>
+                <div class="payment-method" onclick="selectPaymentMethod('netbanking')" data-method="netbanking">
+                    <div class="payment-method-icon">🏦</div>
+                    <div class="payment-method-name">Net Banking</div>
+                </div>
+                <div class="payment-method" onclick="selectPaymentMethod('cod')" data-method="cod">
+                    <div class="payment-method-icon">💵</div>
+                    <div class="payment-method-name">Cash on Delivery</div>
+                </div>
+            </div>
+
+            <div class="card-details active" id="cardDetails">
+                <div class="form-group">
+                    <label>Cardholder Name</label>
+                    <input type="text" id="cardName" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                <div class="card-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" id="cardCvv" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-details" id="upiDetails">
+                <div class="form-group">
+                    <label>UPI ID</label>
+                    <input type="text" id="upiId" placeholder="yourname@upi">
+                </div>
+            </div>
+
+            <div class="card-details" id="netbankingDetails">
+                <div class="form-group">
+                    <label>Select Bank</label>
+                    <input type="text" id="bankName" placeholder="Enter your bank name">
+                </div>
+            </div>
+
+            <div class="card-details" id="codDetails">
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phoneNumber" placeholder="Enter 10-digit mobile number" maxlength="10">
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <input type="text" id="deliveryAddress" placeholder="Enter your complete address">
+                </div>
+            </div>
+
+            <button class="pay-btn" onclick="processPayment()">Complete Payment</button>
+            <button class="cancel-payment" onclick="closePayment()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">✅</div>
+            <h2>Order Successful!</h2>
+            <p>Your order has been placed successfully. You will receive a confirmation shortly.</p>
+            <button class="close-success" onclick="closeSuccess()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/payment.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
